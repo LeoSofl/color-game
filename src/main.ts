@@ -1,24 +1,22 @@
-import './style.css'
-import typescriptLogo from './typescript.svg'
-import viteLogo from '/vite.svg'
-import { setupCounter } from './counter.ts'
+// main.js
+import Phaser from 'phaser';
+import { SpinePlugin } from '@esotericsoftware/spine-phaser';
+// import BootScene from './scenes/BootScene';
+// import MenuScene from './scenes/MenuScene';
+import GameScene from './scenes/GameScene';
 
-document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
-  <div>
-    <a href="https://vite.dev" target="_blank">
-      <img src="${viteLogo}" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://www.typescriptlang.org/" target="_blank">
-      <img src="${typescriptLogo}" class="logo vanilla" alt="TypeScript logo" />
-    </a>
-    <h1>Vite + TypeScript</h1>
-    <div class="card">
-      <button id="counter" type="button"></button>
-    </div>
-    <p class="read-the-docs">
-      Click on the Vite and TypeScript logos to learn more
-    </p>
-  </div>
-`
+const config = {
+  type: Phaser.AUTO,
+  width: 1024,
+  height: 768,
+  backgroundColor: '#ffffff',
+  parent: 'game-container',
+  scene: [GameScene],
+  plugins: {
+    scene: [
+      { key: 'SpinePlugin', plugin: SpinePlugin, mapping: 'spine' }
+    ]
+  }
+};
 
-setupCounter(document.querySelector<HTMLButtonElement>('#counter')!)
+new Phaser.Game(config);
